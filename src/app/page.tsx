@@ -9,15 +9,23 @@ import { UserCardProps } from "../libs/types";
 export default function RandomUserPage() {
   const [users, setUsers] = useState<UserCardProps[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [genAmount, setGenAmount] = useState<number>(() => {
-    
-    const storedGenAmount = localStorage.getItem("genAmount");
-    return storedGenAmount ? Number(storedGenAmount) : 1;
-  });
+  const [genAmount, setGenAmount] = useState<number>(1);
 
-  
   useEffect(() => {
-    localStorage.setItem("genAmount", genAmount.toString());
+    
+    if (typeof window !== "undefined") {
+      const storedGenAmount = localStorage.getItem("genAmount");
+      if (storedGenAmount) {
+        setGenAmount(Number(storedGenAmount));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    
+    if (typeof window !== "undefined") {
+      localStorage.setItem("genAmount", genAmount.toString());
+    }
   }, [genAmount]);
 
   const generateBtnOnClick = async () => {
