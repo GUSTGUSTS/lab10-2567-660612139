@@ -12,7 +12,7 @@ export default function RandomUserPage() {
   const [genAmount, setGenAmount] = useState<number>(() => {
     
     const storedGenAmount = localStorage.getItem("genAmount");
-    return storedGenAmount ? Number(storedGenAmount) : 2;
+    return storedGenAmount ? Number(storedGenAmount) : 1;
   });
 
   
